@@ -19,7 +19,7 @@ class WilliamsWholesaleExtension extends Extension {
                 $container, new FileLocator(__DIR__ . '/../Resources/config'));
 
 
-        $container->setParameter('williams_wholesale.url', $config['williams_wholesale']['url']);
+        $container->setParameter('williams_wholesale.url', $config['url']);
 
         $loader->load('services.yml');
     }
