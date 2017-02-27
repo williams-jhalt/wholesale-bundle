@@ -1,0 +1,4 @@
+services:
+    williams_wholesale.service:
+        class: Williams\WholesaleBundle\Service\WholesaleService
+        arguments: [ "%williams_wholesale.url%" ] 
