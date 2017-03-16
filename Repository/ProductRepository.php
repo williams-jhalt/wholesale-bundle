@@ -18,10 +18,12 @@ class ProductRepository {
 
     public function findAll($limit = 100, $offset = 0) {
 
-        $res = $this->client->request('GET', '/rest/products', [
-            'format' => 'json',
-            'start' => $offset,
-            'limit' => $limit
+        $res = $this->client->get('/rest/products', [
+            'query' => [
+                'format' => 'json',
+                'start' => $offset,
+                'limit' => $limit
+            ]
         ]);
 
         if ($res->getStatusCode() != 200) {
@@ -54,8 +56,10 @@ class ProductRepository {
 
     public function find($id) {
 
-        $res = $this->client->request('GET', '/rest/products/' . $id, [
-            'format' => 'json'
+        $res = $this->client->get('/rest/products/' . $id, [
+            'query' => [
+                'format' => 'json'
+            ]
         ]);
 
         if ($res->getStatusCode() != 200) {

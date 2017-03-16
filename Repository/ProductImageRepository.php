@@ -18,10 +18,12 @@ class ProductImageRepository {
 
     public function findAll($limit = 100, $offset = 0) {
 
-        $res = $this->client->request('GET', '/rest/product-images', [
-            'format' => 'json',
-            'start' => $offset,
-            'limit' => $limit
+        $res = $this->client->get('/rest/product-images', [
+            'query' => [
+                'format' => 'json',
+                'start' => $offset,
+                'limit' => $limit
+            ]
         ]);
 
         if ($res->getStatusCode() != 200) {
@@ -54,8 +56,10 @@ class ProductImageRepository {
 
     public function findBySku($sku) {
 
-        $res = $this->client->request('GET', '/rest/product-images/' . $sku, [
-            'format' => 'json'
+        $res = $this->client->get('/rest/product-images/' . $sku, [
+            'query' => [
+                'format' => 'json'
+            ]
         ]);
 
         if ($res->getStatusCode() != 200) {
@@ -63,7 +67,7 @@ class ProductImageRepository {
         }
 
         $range = $res->getHeader('X-Content-Range');
-        
+
         $matches = array();
 
         preg_match('/items (\d+)-(\d+)\/(\d+)/', $range[0], $matches);
@@ -88,8 +92,10 @@ class ProductImageRepository {
 
     public function find($id) {
 
-        $res = $this->client->request('GET', '/rest/product-images/' . $id, [
-            'format' => 'json'
+        $res = $this->client->get('/rest/product-images/' . $id, [
+            'query' => [
+                'format' => 'json'
+            ]
         ]);
 
         if ($res->getStatusCode() != 200) {

@@ -17,10 +17,12 @@ class ManufacturerRepository {
 
     public function findAll($limit = 100, $offset = 0) {
 
-        $res = $this->client->request('GET', '/rest/manufacturers', [
-            'format' => 'json',
-            'start' => $offset,
-            'limit' => $limit
+        $res = $this->client->get('/rest/manufacturers', [
+            'query' => [
+                'format' => 'json',
+                'start' => $offset,
+                'limit' => $limit
+            ]
         ]);
 
         if ($res->getStatusCode() != 200) {
@@ -53,8 +55,10 @@ class ManufacturerRepository {
 
     public function find($id) {
 
-        $res = $this->client->request('GET', '/rest/manufacturers/' . $id, [
-            'format' => 'json'
+        $res = $this->client->get('/rest/manufacturers/' . $id, [
+            'query' => [
+                'format' => 'json'
+            ]
         ]);
 
         if ($res->getStatusCode() != 200) {
